@@ -23,22 +23,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.example.smarthome.Gesture
+import com.example.smarthome.Gestures
 
-data class Gesture(val name: String, val fileName: String)
 
 @Composable
 fun GestureList(selectedRoute: MutableState<String>) {
-  // TODO: Implement gesture list
-  val gestures = listOf(
-    Gesture("Turn on lights", "h_light_on"),
-    Gesture("Turn off lights", "h_light_off"),
-    Gesture("Turn on fan", "h_fan_on"),
-    Gesture("Turn off fan", "h_fan_off"),
-    Gesture("Increase fan speed", "h_increase_fan_speed"),
-    Gesture("Decrease fan speed", "h_decrease_fan_speed"),
-    Gesture("Set Thermostat to specified temperature", "h_set_thermo"),
-  ) + (0..9).map { Gesture("Gesture $it", "h_$it") }
-
+  val gestures = Gestures.list
   DropdownMenuBox(items = gestures, onItemClicked = { selectedRoute.value = "gesture_detail/$it" })
 }
 
@@ -78,7 +69,7 @@ fun DropdownMenuBox(
         DropdownMenuItem(onClick = {
           onItemClicked(gesture.fileName)
           expanded = false
-        }, text = { Text(gesture.name) })
+        }, text = { Text(gesture.label) })
       }
     }
   }

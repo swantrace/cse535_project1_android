@@ -14,6 +14,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import com.example.smarthome.pages.GestureDetail
 import com.example.smarthome.pages.GestureList
 import com.example.smarthome.pages.GestureRecording
@@ -21,6 +22,7 @@ import com.example.smarthome.pages.GestureRecording
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun App() {
+  val context = LocalContext.current
   val selectedRoute = remember {
     mutableStateOf(Routes.gesture_list.route)
   }
@@ -51,7 +53,7 @@ fun App() {
     ) {
       when (selectedRoute.value.split("/").first()) {
         Routes.gesture_list.route      -> GestureList(selectedRoute)
-        Routes.gesture_detail.route    -> GestureDetail(selectedRoute)
+        Routes.gesture_detail.route    -> GestureDetail(selectedRoute, context)
         Routes.gesture_recording.route -> GestureRecording(selectedRoute)
       }
     }
