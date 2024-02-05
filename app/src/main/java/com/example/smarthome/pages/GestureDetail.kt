@@ -13,8 +13,8 @@ fun GestureDetail(selectedRoute: MutableState<String>) {
     // TODO: Implement gesture list
     Text(text = "Gesture Detail ${selectedRoute.value}")
     Button(onClick = {
-        selectedRoute.value = "gesture_list"
+        selectedRoute.value = "gesture_recording"
     }, modifier = Modifier.padding(16.dp)) {
-        Text(text = "Go to List")
+        Text(text = "Go to Recording")
     }
 }
