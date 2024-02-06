@@ -15,13 +15,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.LifecycleCoroutineScope
 import com.example.smarthome.pages.GestureDetail
 import com.example.smarthome.pages.GestureList
 import com.example.smarthome.pages.GestureRecording
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun App() {
+fun App(lifecycleScope: LifecycleCoroutineScope) {
   val context = LocalContext.current
   val selectedRoute = remember {
     mutableStateOf(Routes.gesture_list.route)
@@ -34,11 +35,9 @@ fun App() {
       title = {
         Text(
           text = "Smart Home${
-            (Routes.get(
-              selectedRoute.value
-                .split("/")
-                .first()
-            ) as Route).title.let { " - $it" }
+            (Routes[selectedRoute.value
+              .split("/")
+              .first()] as Route).title.let { " - $it" }
           }",
           color = MaterialTheme.colorScheme.onPrimary,
         )

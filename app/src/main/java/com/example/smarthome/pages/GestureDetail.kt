@@ -1,5 +1,6 @@
 package com.example.smarthome.pages
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
@@ -14,7 +15,11 @@ import androidx.compose.ui.viewinterop.AndroidView
 import android.content.Context
 import android.net.Uri
 import android.widget.VideoView
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.text.style.TextAlign
+import com.example.smarthome.Gestures
 
+@SuppressLint("DiscouragedApi")
 @Composable
 fun GestureDetail(selectedRoute: MutableState<String>, context: Context) {
   val videoFileName = selectedRoute.value.split("/").last()
@@ -26,6 +31,17 @@ fun GestureDetail(selectedRoute: MutableState<String>, context: Context) {
   Column(modifier = Modifier
     .fillMaxSize()
     .padding(8.dp, 16.dp, 8.dp, 4.dp)) {
+
+    // display the name of the gesture
+    Text(
+      text = Gestures[videoFileName]?.label ?: "Unknown",
+      modifier = Modifier
+        .fillMaxWidth()
+        .padding(bottom = 8.dp, start = 4.dp),
+      style = MaterialTheme.typography.titleLarge,
+      textAlign = TextAlign.Start
+    )
+
     // Limit the size of the video view
     Box(modifier = Modifier
       .fillMaxWidth()
@@ -42,7 +58,7 @@ fun GestureDetail(selectedRoute: MutableState<String>, context: Context) {
     Row(
       modifier = Modifier
         .fillMaxWidth()
-        .padding(8.dp),
+        .padding(start = 14.dp, end = 14.dp, top = 8.dp, bottom = 8.dp),
       horizontalArrangement = Arrangement.SpaceBetween
     ) {
       Button(
