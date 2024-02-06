@@ -18,6 +18,11 @@ data class Gesture(val label: String, val fileName: String, val name: String) {
     val currentNumber = getPracticeNumber(context)
     prefs.edit().putInt(fileName + PRACTICE_NUMBER, currentNumber + 1).apply()
   }
+
+  fun setPracticeNumber(context: Context, number: Int) {
+    val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+    prefs.edit().putInt(fileName + PRACTICE_NUMBER, number).apply()
+  }
 }
 
 object Gestures {
@@ -61,7 +66,7 @@ object Gestures {
     h_9,
   )
 
-  fun get(fileName: String): Gesture? {
+  operator fun get(fileName: String): Gesture? {
     return list.find { it.fileName == fileName }
   }
 }

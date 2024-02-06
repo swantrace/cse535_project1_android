@@ -54,7 +54,7 @@ fun App() {
       when (selectedRoute.value.split("/").first()) {
         Routes.gesture_list.route      -> GestureList(selectedRoute)
         Routes.gesture_detail.route    -> GestureDetail(selectedRoute, context)
-        Routes.gesture_recording.route -> GestureRecording(selectedRoute)
+        Routes.gesture_recording.route -> GestureRecording(selectedRoute, context)
       }
     }
   }
